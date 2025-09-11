@@ -1,9 +1,9 @@
 USE org;
 SHOW TABLES;
-DESC worker;
-DESC series;
 DESC bonus;
-SHOW CREATE TABLE reviews;
+DESC title;
+DESC worker;
+
 
 SELECT * FROM worker;
 -- Select first name and alias it as worker_name
@@ -65,3 +65,13 @@ SELECT * FROM worker WHERE salary BETWEEN 100000 AND 500000;
 
 -- Fetch workers who joined in February 2021
 SELECT * FROM worker WHERE YEAR(joining_date) = 2021 AND MONTH(joining_date) = 02;
+
+-- Count how many workers are in the 'admin' department
+SELECT department, COUNT(worker_id) FROM worker WHERE department = 'admin';
+
+-- Get full names of workers whose salary is between 50,000 and 100,000
+SELECT CONCAT_WS(' ', first_name, last_name) AS full_name FROM worker WHERE salary >= 50000 AND salary <= 100000;
+
+-- Count number of workers in each department and order them by count in descending order
+SELECT department, COUNT(worker_id) AS no_of_worker FROM worker GROUP BY department ORDER BY no_of_worker DESC;
+
